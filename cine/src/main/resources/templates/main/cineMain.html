@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<!--js 파일 인포트-->
+	<script src="../../login/js/modal.js"></script>
+	<script src="/main/js/main.js"></script>
+	<script src="/main/js/loginCheck.js"></script>
+	<script src="/main/js/cinelink.api.min.js"></script>
+	<script src="/main/js/cinelink.common.min.js"></script>
+	
+	
+	<!--css 파일 인포트-->
+	<link rel="stylesheet" href="/main/css/cineMain.css" media="all">
+	
+</head>
+
+<body>
+	<header id="header" class="main-header no-bg">
+		<h1 class="ci">
+			<a href="/" title="cineLink 메인으로 가기">CINELINK : Life Theater</a>
+		</h1>
+
+		<div class="util-area">
+			<div class="left-link">
+				<a href="/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
+				<a href="/benefit/membership" title="멤버십">멤버십</a>
+				<a href="/support" title="고객센터">고객센터</a>
+			</div>
+			
+			<div class="right-link">
+				<!-- 로그인전 -->
+				<div th:if="${session.loginid == null and session.kakaoemail == null}">
+					<div class="booking-form">
+						<div class="before">
+							<a href="#" onclick="openModal()">로그인</a> <a href="../login/save" title="회원가입">회원가입</a>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창을 include -->
+				<div th:include="login/modal"></div>
+
+				<!-- 로그인후 -->
+				<div th:if="${session.loginid != null}">
+					<a href="/logout" class="after">로그아웃</a>&nbsp; <span th:text="${session.loginid}"></span>님
+					<!-- 						 <a href=""	class="notice" title="알림">알림</a> -->
+				</div>
+				<div th:if="${session.kakaoemail != null}">
+					&nbsp; <span th:text="${session.kakaoname}"></span>님
+					<!-- 							<a href=""	class="notice" title="알림">알림</a> -->
+					<a
+						href="https://kauth.kakao.com/oauth/logout?client_id=b4e15198a92c66541e626d75b50f81ec&logout_redirect_uri=http://localhost:8081/logout">
+						로그아웃 </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="link-area">
+
+			<div th:if="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인한 경우에 보이는 내용 -->
+				<a href="../mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의
+					시네링크</a>
+			</div>
+			<div th:unless="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인하지 않은 경우에 보이는 내용 -->
+				<a href="#" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">로그인</a>
+			</div>
+		</div>
+		
+		
+		<div class="link-area">
+			<a href="#layer_sitemap" class="header-open-layer btn-layer-sitemap" title="사이트맵">사이트맵</a>
+			<a href="#layer_header_search" class="header-open-layer btn-layer-search" title="검색">검색</a>
+			<a href="/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a>
+			
+			<div th:if="${session.loginid == null and session.kakaoemail == null}">
+				<a href="#layer_mymega2" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.loginid != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.kakaoemail != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			
+		</div>
+
+		<nav id="gnb" class="">
+			<ul class="gnb-depth1">
+				<li class="gnb_menu">
+					<a href="../movieDetail/movie" class="gnb-txt-movie" title="영화">영화</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="../booking/cineReserve " id="reserve" class="gnb-txt-reserve" title="예매" >예매</a>
+					<!--<a href="#" id="reserve" class="gnb-txt-reserve" title="예매">예매</a>-->
+				</li>
+				<li class="gnb_menu">
+					<a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="/store" class="gnb-txt-store" title="스토어">스토어</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	
+	
+	
+	
+	
+	<div class="container main-container area-ad">
+
+		<!-- contents -->
+		<div id="contents">
+
+			<!-- main-page -->
+			<div class="main-page">
+
+				<!-- section main-movie : 영화 -->
+				<div id="main_section01" class="section main-movie">
+
+					<!--메인 배경화면-->
+					<div class="bg">
+						<div class="bg-pattern"></div>
+						<img src="https://img.CINELINK.co.kr/SharedImg/2023/08/30/9rMxPoOK8ZN3cdXpjpoedHUO2taDDYmR_380.jpg"
+							alt="still_01.jpg" onerror="noImg(this, 'main');">
+					</div>
+
+					<!-- cont-area  -->
+					<div class="cont-area">
+
+						<!-- tab-sorting -->
+						<div class="tab-sorting">
+							<button type="button" class="on" sort="boxoRankList" name="btnSort">박스오피스</button>
+
+						</div>
+
+						<!-- tab-sorting -->
+						<a href="/movieDetail/movie" class="more-movie" title="더 많은 영화보기"> 더 많은
+							영화보기 <i class="iconset ico-more-corss gray"></i>
+						</a>
+
+						<!-- main-movie-list -->
+						<div class="main-movie-list">
+							<ol class="list">
+							</ol>
+						</div>
+						<!--// main-movie-list -->
+						<div class="search-link">
+							<div class="cell">
+								<div class="search">
+									<input type="text" placeholder="영화명을 입력해 주세요" title="영화 검색" class="input-text"
+										id="movieName">
+									<button type="button" class="btn" id="btnSearch">
+										<i class="iconset ico-search-w"></i> 검색
+									</button>
+								</div>
+							</div>
+
+							<div class="cell">
+								<a href="/booking/timetable" title="상영시간표 보기"><i class="iconset ico-schedule-main"></i>
+									상영시간표</a>
+							</div>
+							<div class="cell">
+								<a href="/movieDetail/movie" title="박스오피스 보기"><i class="iconset ico-boxoffice-main"></i>
+									박스오피스</a>
+							</div>
+							<div class="cell">
+								
+								
+								<div th:if="${session.loginid == null and session.kakaoemail == null}">
+									<a href="#" title="빠른예매 보기" onclick="openModal()" ><i
+											id="fastReserve"
+											class="iconset ico-quick-reserve-main"></i>
+										빠른예매</a>
+								</div>				
+				
+								<div th:if="${session.loginid != null}">
+									<a href="/booking/cineReserve" title="빠른예매 보기" ><i
+											class="iconset ico-quick-reserve-main"></i>
+										빠른예매</a>
+								</div>
+								
+								<div th:if="${session.kakaoemail != null}">
+									<a href="/booking/cineReserve" title="빠른예매 보기" ><i
+											class="iconset ico-quick-reserve-main"></i>
+										빠른예매</a>
+								</div>
+							
+									
+									
+									
+							</div>
+						</div>
+					</div>
+					<!--// cont-area  -->
+				</div>
+			</div>
+		</div>
+		<!--// contents -->
+		
+		
+		
+        <!-- footer -->
+        <footer id="footer">
+            <!-- footer-top -->
+            <div class="footer-top">
+                <div class="inner-wrap">
+                    <ul class="fnb">
+                        <li><a href="/CINELINKinfo" title="회사소개 페이지로 이동"> 회사소개 </a></li>
+                        <li><a href="/recruit" title="인재채용 페이지로 이동"> 인재채용 </a></li>
+                        <li><a href="/socialcontribution" title="사회공헌 페이지로 이동"> 사회공헌 </a></li>
+                        <li><a href="/partner" title="제휴/광고/부대사업문의 페이지로 이동"> 제휴/광고/부대사업문의 </a></li>
+                        <li><a href="/support/terms" title="이용약관 페이지로 이동"> 이용약관 </a></li>
+                        <li><a href="/support/lcinfo" title="위치기반서비스 이용약관 페이지로 이동"> 위치기반서비스 이용약관 </a></li>
+                        <li class="privacy"><a href="/support/privacy" title="개인정보처리방침 페이지로 이동"> 개인정보처리방침 </a></li>
+                        <li><a href="https://jebo.joonganggroup.com/main.do" target="_blank" title="윤리경영 페이지로 이동"> 윤리경영
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// footer-top -->
+
+            <!-- footer-bottom -->
+            <div class="footer-bottom">
+                <div class="inner-wrap">
+                    <div class="ci">CINELINK : Life Theater</div>
+                    <div class="footer-info">
+                        <div>
+                            <address>서울특별시 마포구 양화로 122 LAB7 빌딩 3층, 4층(에이콘 아카데미)</address>
+                            <p>TEL 02-2231-6412</p>
+                        </div>
+                        <p>대표자명 윤장걸</p>
+                        <p>&middot; 개인정보보호책임자 박건호</p>
+                        <p>&middot; 사업자등록번호 000-00-00000</p>
+                        <p>&middot; 통신판매업신고번호 2023-서울마포-0000</p>
+                        <p class="copy">COPYRIGHT &copy; CINELINKJoongAng, Inc. All rights reserved</p>
+                    </div>
+
+                    <div class="footer-sns">
+                        <a href="https://www.youtube.com/onCINELINK" target="_blank" title="CINELINK 유튜브 페이지로 이동">
+                            <i class="iconset ico-youtubeN">유튜브</i>
+                        </a>
+                        <a href="http://instagram.com/CINELINKon" target="_blank" title="CINELINK 인스타그램 페이지로 이동">
+                            <i class="iconset ico-instagramN">인스타그램</i>
+                        </a>
+                        <a href="https://www.facebook.com/CINELINKon" target="_blank" title="CINELINK 페이스북 페이지로 이동">
+                            <i class="iconset ico-facebookN">페이스북</i>
+                        </a>
+                        <a href="https://twitter.com/CINELINKon" target="_blank" title="CINELINK 트위터 페이지로 이동">
+                            <i class="iconset ico-twitterN">트위터</i>
+                        </a>
+                    </div>
+                    <!--// footer-bottom -->
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    </div>
+    <!--// footer -->
+
+	</div>
+</body>
+
+</html>

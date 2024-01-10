@@ -1,0 +1,12 @@
+.signForm {
+
+	margin: 0 25%;
+	border: 2px solid gold;
+}
+
+.signForm>label,input,select,button{
+	margin-bottom: 50px;
+	
+	border: 10px ridge grey;
+	
+}

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>store</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="/store/js/loginCheck.js"></script>
+	
+	
+	<script src="/store/js/cineStore.js"></script>
+	
+	
+    <link rel="stylesheet" href="/login/css/modal.css" media="all">
+	<!--<link rel="stylesheet" href="/store/css/cineStore.css" media="all">-->
+	
+	
+	<link rel="stylesheet" href="/store/css/movie.css" media="all">
+	
+	
+</head>
+<script type="text/javascript">
+
+
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+    showTab('loginTab');
+}
+
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+}
+
+function showTab(tabName) {
+    var i;
+    var tabs = document.getElementsByClassName('tab');
+    for (i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+    }
+
+    var tabContent = document.getElementById(tabName);
+    tabContent.style.display = 'block';
+
+    if (tabName === 'loginTab') {
+        // /login 페이지의 내용을 가져오기 위한 XMLHttpRequest 요청
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/login', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // 가져온 내용을 로그인 탭에 채워 넣습니다.
+                tabContent.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+}
+
+
+</script>
+<body>
+   <header id="header" class="main-header no-bg">
+		<h1 class="ci">
+			<a href="/" title="cineLink 메인으로 가기">CINELINK : Life Theater</a>
+		</h1>
+
+		<div class="util-area">
+			<div class="left-link">
+				<a href="/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
+				<a href="/benefit/membership" title="멤버십">멤버십</a>
+				<a href="/support" title="고객센터">고객센터</a>
+			</div>
+			
+			<div class="right-link">
+				<!-- 로그인전 -->
+				<div th:if="${session.loginid == null and session.kakaoemail == null}">
+					<div class="booking-form">
+						<div class="before">
+							<a href="#" onclick="openModal()">로그인</a> <a href="../login/save" title="회원가입">회원가입</a>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창을 include -->
+				<div th:include="login/modal"></div>
+
+				<!-- 로그인후 -->
+				<div th:if="${session.loginid != null}">
+					<a href="/logout" class="after">로그아웃</a>&nbsp; <span th:text="${session.loginid}"></span>님
+					<!-- 						 <a href=""	class="notice" title="알림">알림</a> -->
+				</div>
+				<div th:if="${session.kakaoemail != null}">
+					&nbsp; <span th:text="${session.kakaoname}"></span>님
+					<!-- 							<a href=""	class="notice" title="알림">알림</a> -->
+					<a
+						href="https://kauth.kakao.com/oauth/logout?client_id=b4e15198a92c66541e626d75b50f81ec&logout_redirect_uri=http://localhost:8081/logout">
+						로그아웃 </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="link-area">
+
+			<div th:if="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인한 경우에 보이는 내용 -->
+				<a href="../mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의
+					시네링크</a>
+			</div>
+			<div th:unless="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인하지 않은 경우에 보이는 내용 -->
+				<a href="#" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">로그인</a>
+			</div>
+		</div>
+		
+		
+		<div class="link-area">
+			<a href="#layer_sitemap" class="header-open-layer btn-layer-sitemap" title="사이트맵">사이트맵</a>
+			<a href="#layer_header_search" class="header-open-layer btn-layer-search" title="검색">검색</a>
+			<a href="/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a>
+			
+			<div th:if="${session.loginid == null and session.kakaoemail == null}">
+				<a href="#layer_mymega2" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.loginid != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.kakaoemail != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			
+		</div>
+
+		<nav id="gnb" class="">
+			<ul class="gnb-depth1">
+				<li class="gnb_menu">
+					<a href="../movieDetail/movie" class="gnb-txt-movie" title="영화">영화</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="../booking/cineReserve" id="reserve" class="gnb-txt-reserve" title="예매" >예매</a>
+					<!--<a href="#" id="reserve" class="gnb-txt-reserve" title="예매">예매</a>-->
+				</li>
+				<li class="gnb_menu">
+					<a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="/store" class="gnb-txt-store" title="스토어">스토어</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	
+	
+	
+	
+	
+	
+	
+<form id="storeForm" name="storeForm" method="post">
+</form>
+
+<div class="container">
+    <div class="page-util">
+        <div class="inner-wrap">
+            <div class="location">
+                <span>Home</span>
+                <a href="/store" title="스토어">스토어</a>
+            </div>
+        </div>
+    </div>
+	<div id="storeMainList"></div>
+	<div id="storeMainList">
+	<!-- contents -->
+		<div id="contents" class="">
+		    <div class="inner-wrap">
+		        <h2 class="tit">스토어</h2>
+		        <div class="prdt_list">
+		          <ul>
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="/storeDetail?prdtcd=b1">
+				        	<img id="imgprdt" src="https://img.megabox.co.kr/SharedImg/store/2023/08/11/dXvz69A1OdVWu2MtYqXiJeuATZwA3PHm_280.png">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">[얼리버드]티켓북단품패키지</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">오리지널 티켓북 시즌3 1개<br>+ 돌비에디션티켓북 1개</div>
+				            <p class="sale"><span>40,000원</span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		        	
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="/storeDetail?prdtcd=b2">
+				        	<img id="imgprdt" src="https://img.megabox.co.kr/SharedImg/store/2023/07/13/hApRC44t2qBnFmLMlpthyuJTLlsC2qzz_280.jpg">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">씨네링크 미니 시네마 (단품)</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">미니 시네마 (단품)</div>
+				            <p class="sale"><span>23,000원</span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		        	
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="/storeDetail?prdtcd=b3">
+				        	<img id="imgprdt" src="https://img.megabox.co.kr/SharedImg/store/2023/07/13/muo0f1sDqziR7MdCuNZiO7cQb5qDrdmP_280.jpg">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">씨네링크 미니 시네마(러브콤보 세트)</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">미니 시네마+팝콘L 1+콜라R 2</div>
+				            <p class="sale"><span>28,000원</span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		        	
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="/storeDetail?prdtcd=b4">
+				        	<img id="imgprdt" src="https://img.megabox.co.kr/SharedImg/store/2022/03/07/qB1IVqlOLCV7hOOEAJp4J9iG3J5oVWjv_280.png">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">러브콤보</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">팝콘(L) 1 + 탄산음료(R) 2</div>
+				            <p class="sale"><span>10,000원</span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		        	
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="https://www.kakaocorp.com/page/service/service/KakaoT?lang=ko">
+				        	<img id="imgprdt" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/4086aee3017800001.png">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">카카오택시</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">바로 영화관으로 이동하기 위해<br>택시를 호출합니다</div>
+				            <p class="sale"><span></span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		        	
+		        	<li style="display:inline-block;">
+		        	  <div class="prdt">
+			        	<a href="https://www.ut.taxi/kr/ko/ride/?uclick_id=7c2e9058-c31f-49c5-9f07-04ab231e284c">
+				        	<img id="imgprdt" src="https://www.uber-assets.com/image/upload/f_auto,q_auto:eco,c_fill,w_84,h_84/v1631710256/assets/2b/251237-ed9c-42a5-93af-0b48140725a0/original/UT_Logo_Black_Color.png">
+				        	<!-- 제품명 최대 2줄 -->
+				            <div class="name">우버택시</div>
+				            <!-- 제품구성 최대 2줄 -->
+				            <div class="bundle">바로 영화관으로 이동하기 위해<br>차량을 호출합니다</div>
+				            <p class="sale"><span></span></p>
+			        	</a>
+			          </div>
+		        	</li>
+		          </ul>
+		        </div>
+		   </div>
+	</div>
+</div>
+
+
+
+	<div style="margin-bottom: 100px;"></div>
+
+
+        <!-- footer -->
+        <footer id="footer">
+            <!-- footer-top -->
+            <div class="footer-top">
+                <div class="inner-wrap">
+                    <ul class="fnb">
+                        <li><a href="/megaboxinfo" title="회사소개 페이지로 이동"> 회사소개 </a></li>
+                        <li><a href="/recruit" title="인재채용 페이지로 이동"> 인재채용 </a></li>
+                        <li><a href="/socialcontribution" title="사회공헌 페이지로 이동"> 사회공헌 </a></li>
+                        <li><a href="/partner" title="제휴/광고/부대사업문의 페이지로 이동"> 제휴/광고/부대사업문의 </a></li>
+                        <li><a href="/support/terms" title="이용약관 페이지로 이동"> 이용약관 </a></li>
+                        <li><a href="/support/lcinfo" title="위치기반서비스 이용약관 페이지로 이동"> 위치기반서비스 이용약관 </a></li>
+                        <li class="privacy"><a href="/support/privacy" title="개인정보처리방침 페이지로 이동"> 개인정보처리방침 </a></li>
+                        <li><a href="https://jebo.joonganggroup.com/main.do" target="_blank" title="윤리경영 페이지로 이동"> 윤리경영
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// footer-top -->
+
+            <!-- footer-bottom -->
+            <div class="footer-bottom">
+                <div class="inner-wrap">
+                    <div class="ci">CINELINK : Life Theater</div>
+                    <div class="footer-info">
+                        <div>
+                            <address>서울특별시 마포구 양화로 122 LAB7 빌딩 3층, 4층(에이콘 아카데미)</address>
+                            <p>TEL 02-2231-6412</p>
+                        </div>
+                        <p>대표자명 윤장걸</p>
+                        <p>&middot; 개인정보보호책임자 박건호</p>
+                        <p>&middot; 사업자등록번호 000-00-00000</p>
+                        <p>&middot; 통신판매업신고번호 2023-서울마포-0000</p>
+                        <p class="copy">COPYRIGHT &copy; CINELINKJANG, Inc. All rights reserved</p>
+                    </div>
+
+                    <div class="footer-sns">
+                        <a href="https://www.youtube.com/onmegabox" target="_blank" title="CINELINK 유튜브 페이지로 이동">
+                            <i class="iconset ico-youtubeN">유튜브</i>
+                        </a>
+                        <a href="http://instagram.com/megaboxon" target="_blank" title="CINELINK 인스타그램 페이지로 이동">
+                            <i class="iconset ico-instagramN">인스타그램</i>
+                        </a>
+                        <a href="https://www.facebook.com/megaboxon" target="_blank" title="CINELINK 페이스북 페이지로 이동">
+                            <i class="iconset ico-facebookN">페이스북</i>
+                        </a>
+                        <a href="https://twitter.com/megaboxon" target="_blank" title="CINELINK 트위터 페이지로 이동">
+                            <i class="iconset ico-twitterN">트위터</i>
+                        </a>
+                    </div>
+                    <!--// footer-bottom -->
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    </div>
+    <!--// footer -->
+
+</body>
+</html>

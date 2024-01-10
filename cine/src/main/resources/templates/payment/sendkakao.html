@@ -1,0 +1,92 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>카톡 공유</title>
+<script type="text/JavaScript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+   <link rel="stylesheet" href="/payment/css/sendkakao.css" media="all">
+</head>
+<body>
+   
+   
+   <div class="kakao">
+      <img src="/payment/img/movieicon.gif">
+      <p>예매 정보를 카카오톡으로 전송할 수 있어요!</p>
+      
+   
+          <button class="subbtn1" onClick="sendLinkDefault();">예매전송</button>
+          <button class="subbtn2" onclick="goHome();" >메인으로</button>
+          <button class="subbtn3" onclick="taxi();" >택시호출</button>
+          <button class="subbtn4" onclick="snack();" >간식사기</button>
+      
+   </div>
+
+
+
+
+
+<script type="text/javascript">
+   
+    function sendLinkCustom() {
+        Kakao.init("540dda307e1f0714f39e70339c65d585");
+        Kakao.Link.sendCustom({
+            templateId: 98793
+        });
+    }
+    
+    function goHome() {
+      parent.location.href = "/";
+        
+    }
+    function taxi() {
+      window.open("https://www.uber.com/kr/ko/ride/ubertaxi/");
+        
+    }
+    function snack() {
+      parent.location.href = "/store";
+        
+    }
+    
+    
+</script>
+
+
+      <script type="text/javascript">
+         function sendLinkCustom() {
+            Kakao.init("540dda307e1f0714f39e70339c65d585");
+            Kakao.Link.sendCustom({
+               templateId: 98793
+            });
+         }
+      </script>
+
+      <script>
+         try {
+            function sendLinkDefault() {
+               Kakao.init('540dda307e1f0714f39e70339c65d585')
+               Kakao.Link.sendDefault({
+                  objectType: 'feed',
+                  content: {
+                     title: sessionStorage.getItem('movieName'),
+                     description: sessionStorage.getItem("movieArea2") + "관 " + sessionStorage.getItem("movieDate") + "\n 시간: " + sessionStorage.getItem("movieTime")  + ", 좌석 : " + sessionStorage.getItem("seats"),
+                     imageUrl:
+                        sessionStorage.getItem('imglink'),
+                     link: {
+                        mobileWebUrl: 'https://localhost:8081',
+                        webUrl: 'https://localhost:8081',
+                     },
+                  }
+               })
+            }
+            ; window.kakaoDemoCallback && window.kakaoDemoCallback()
+         }
+         catch (e) {window.kakaoDemoException && window.kakaoDemoException(e)}
+      </script>
+
+
+
+
+
+   
+</body>
+</html>

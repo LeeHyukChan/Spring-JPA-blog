@@ -1,0 +1,462 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0px;
+    overflow: auto;
+    /* overflow-y: scroll; */
+    letter-spacing: 0;
+    line-height: 1.5;
+    font-size: 15px;
+    color: #444;
+    font-weight: 400;
+    font-family: NanumBarunGothic,Dotum,'돋움',sans-serif;
+}
+
+.booking-form a{
+	text-decoration: none;	
+}
+
+#header {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    min-width: 1100px;
+    height: 91px;
+    background: #fff;
+    border-bottom: 1px solid #351f67
+}
+
+
+#header .ci {
+    position: absolute;
+    left: 50%;
+    top: 23px;
+    width: 140px;
+    height: 90px;
+    margin: 0 0 0 -70px;
+    padding: 0
+}
+
+#header .ci a {
+    display: block;
+    position: absolute;
+    right: -20px;
+    width: 195px;
+    height: 47px;
+    margin: 0;
+    padding: 0;
+    padding-right: 0;
+    font-size: 0;
+    line-height: 0;
+    background: url(https://img.megabox.co.kr/static/pc/images/common/ci/logo_new2.png) center center no-repeat
+}
+
+#header .util-area {
+    position: relative;
+    width: 1100px;
+    margin: 0 auto;
+    color: #666
+}
+
+#header .util-area:after,
+#header .util-area:before {
+    content: '';
+    display: table
+}
+
+#header .util-area:after {
+    clear: both
+}
+
+#header .util-area .left-link {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    font-size: .8667em
+}
+
+#header .util-area .left-link a {
+    float: left;
+    margin-right: 20px;
+    vertical-align: top
+}
+
+#header .util-area .right-link {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    font-size: .8667em
+}
+
+#header .util-area .right-link a {
+    display: block;
+    float: left;
+    margin-left: 20px;
+    vertical-align: top;
+}
+
+#header .util-area .right-link a:first-child {
+    margin-left: 0
+}
+
+#header .util-area .right-link>a {
+    font-size: .8667em
+}
+
+#header .util-area .right-link>div {
+    float: left
+}
+
+#header .util-area .right-link .before {
+    font-size: .8667em
+}
+
+#header .util-area .right-link .after {
+    position: relative
+}
+
+#header .util-area .right-link .after>a {
+    font-size: .8667em
+}
+
+#header .util-area .right-link .after .notice {
+    position: relative
+}
+
+#header .util-area .right-link .after .notice.on:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: -9px;
+    top: 2px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #59bec9
+}
+
+#header .link-area {
+    position: relative;
+    width: 1100px;
+    margin: 0 auto
+}
+
+#header .link-area:after,
+#header .link-area:before {
+    content: '';
+    display: table
+}
+
+#header .link-area:after {
+    clear: both
+}
+
+
+#header.no-bg {
+    background-color: rgba(20, 16, 16, 0.801);
+    border-bottom: 1px solid rgba(255, 255, 255, .2)
+}
+
+#header.no-bg .ci a {
+    background-image: url(..//img/cinelink2.png);
+    background-size: cover;
+}
+
+#header.no-bg .util-area {
+    color: #888
+}
+
+#header.no-bg .util-area a,
+#header.no-bg .util-area a:focus,
+#header.no-bg .util-area a:hover {
+    color: #888
+}
+
+
+#gnb ul:after,
+#gnb ul:before {
+    content: '';
+    display: table
+}
+
+#gnb ul:after {
+    clear: both
+}
+
+#gnb ul li {
+    margin: 0;
+    padding: 0
+}
+
+#gnb ul li a {
+    display: block
+}
+
+#gnb ul li a:focus,
+#gnb ul li a:hover {
+    text-decoration: none
+}
+
+#gnb>ul {
+    position: relative;
+    width: 1100px;
+    margin: 90px auto 0 auto
+}
+
+#gnb>ul>li>a {
+    position: absolute;
+    top: -38px;
+    height: 38px;
+    text-indent: -9999px;
+    background-position: center 0;
+    background-repeat: no-repeat
+}
+
+#gnb>ul>li>a:after {
+    content: '';
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #339eb2
+}
+
+
+#gnb>ul>li.gnb-menu {
+	list-style-type: none;
+}
+
+
+
+
+/* 아래 두개 잘 모름 */
+#gnb>ul>li.on>a:after {
+    display: block
+}
+
+#gnb>ul>li.on .gnb-depth2 {
+    display: block
+}
+
+
+#gnb>ul>li:nth-child(1)>a {
+    left: 166px;
+}
+
+#gnb>ul>li:nth-child(2)>a {
+    left: 256px
+}
+
+#gnb>ul>li:nth-child(3)>a {
+    left: 345px
+}
+
+#gnb>ul>li:nth-child(4)>a {
+    right: 347px
+}
+
+#gnb>ul>li:nth-child(5)>a {
+    right: 241px
+}
+
+#gnb>ul>li:nth-child(6)>a {
+    right: 150px
+}
+
+#gnb>ul>li>a.gnb-txt-movie {
+    width: 30px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-movie.png)
+}
+
+#gnb>ul>li>a.gnb-txt-reserve {
+    width: 30px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-reserve.png)
+}
+
+#gnb>ul>li>a.gnb-txt-theater {
+    width: 31px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-theater.png)
+}
+
+#gnb>ul>li>a.gnb-txt-event {
+    width: 45px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-event.png)
+}
+
+#gnb>ul>li>a.gnb-txt-store {
+    width: 44px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-store.png)
+}
+
+#gnb>ul>li>a.gnb-txt-benefit {
+    width: 29px;
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-benefit.png)
+}
+
+#gnb .gnb-depth2 {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 44px
+}
+
+#gnb .gnb-depth2 ul {
+    overflow: hidden;
+    display: block
+}
+
+#gnb .gnb-depth2 ul li {
+    display: block;
+    float: left;
+    margin-left: 19px
+}
+
+#gnb .gnb-depth2 ul li:first-child {
+    margin-left: 0
+}
+
+#gnb .gnb-depth2 ul li:last-child {
+    margin-right: 0
+}
+
+#gnb .gnb-depth2 ul li a {
+    overflow: hidden;
+    display: block;
+    height: 44px;
+    line-height: 44px;
+    color: #fff
+}
+
+#gnb .gnb-depth2 ul li a:focus,
+#gnb .gnb-depth2 ul li a:hover {
+    text-decoration: underline
+}
+
+#gnb>ul>li:nth-child(1) .gnb-depth2 ul {
+    padding-left: 50px
+}
+
+#gnb>ul>li:nth-child(2) .gnb-depth2 ul {
+    padding-left: 166px
+}
+
+#gnb>ul>li:nth-child(3) .gnb-depth2 ul {
+    padding-left: 300px
+}
+
+#gnb>ul>li:nth-child(4) .gnb-depth2 ul {
+    padding-left: 598px
+}
+
+#gnb>ul>li:nth-child(6) .gnb-depth2 ul {
+    padding-left: 834px
+}
+
+#header.no-bg #gnb {
+    background-color: rgba(0, 0, 0, .2)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-movie {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-movie-white.png)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-reserve {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-reserve-white.png)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-theater {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-theater-white.png)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-event {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-event-white.png)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-store {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-store-white.png)
+}
+
+#header.no-bg #gnb>ul>li>a.gnb-txt-benefit {
+    background-image: url(https://img.megabox.co.kr/static/pc/images/common/gnb/gnb-txt-benefit-white.png)
+}
+
+
+
+
+
+/* 로그인 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%; /* 화면 가로 중앙에 위치 */
+    top: 50%; /* 화면 세로 중앙에 위치 */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 translate 사용 */
+    width: 800px;
+    height: 80%;
+    overflow: auto;
+    background-color: transparent; 
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    /* margin: 10% auto; 2023.10.11 3:28 비회원 모달창 떄문에 변경중 기존 회원 로그인 크기*/
+    /* padding: 20px; 비회원 모달창 떄문에 변경중 기존 회원 로그인 크기* */
+    margin: 0 auto;
+    padding-top: 20px; /* 모달 상단과 탭간의 여백을 조절 */
+    padding-bottom: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.modal-content-wrapper {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 0; /* 모달 상단과 탭간의 여백을 조절 */
+    padding-bottom: 50px;
+     height: auto; /* 자식 요소에 맞게 높이를 자동으로 조절합니다 */
+}
+
+
+.modal-content .tab {
+    margin-top: 20px; /* 탭 간의 여백 조절 */
+}
+.tab-button {
+    width: 48%; /* 버튼의 너비를 48%로 설정하여 반으로 나눔 */
+    height: 40px; /* 버튼의 높이 설정 */
+    font-size: 16px; /* 버튼의 글꼴 크기 설정 */
+    margin-top: 0; /* 버튼 간의 여백 조절 */
+}
+.tab {
+    display: none;
+    text-align: center;
+
+    margin: 0; /* 수정: 모든 여백을 없앰 */
+    padding: 0; /* 수정: 내부 패딩을 없앰 */
+}
+
+.modal-content button {
+    margin-top: 10px;
+}
+
+.modal-content form {
+    text-align: center;
+}
+
+.modal-content form input {
+    margin-bottom: 10px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+/* 로그인 모달 */   
+

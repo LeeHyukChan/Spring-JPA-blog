@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="/mypage/css/movie.css" media="all">
+	
+	 <header id="header" class="main-header no-bg">
+		<h1 class="ci">
+			<a href="/" title="cineLink 메인으로 가기">CINELINK : Life Theater</a>
+		</h1>
+
+		<div class="util-area">
+			<div class="left-link">
+				<a href="/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
+				<a href="/benefit/membership" title="멤버십">멤버십</a>
+				<a href="/support" title="고객센터">고객센터</a>
+			</div>
+			
+			<div class="right-link">
+				<!-- 로그인전 -->
+				<div th:if="${session.loginid == null and session.kakaoemail == null}">
+					<div class="booking-form">
+						<div class="before">
+							<a href="#" onclick="openModal()">로그인</a> <a href="../login/save" title="회원가입">회원가입</a>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창을 include -->
+				<div th:include="login/modal"></div>
+
+				<!-- 로그인후 -->
+				<div th:if="${session.loginid != null}">
+					<a href="/logout" class="after">로그아웃</a>&nbsp; <span th:text="${session.loginid}"></span>님
+					<!-- 						 <a href=""	class="notice" title="알림">알림</a> -->
+				</div>
+				<div th:if="${session.kakaoemail != null}">
+					&nbsp; <span th:text="${session.kakaoname}"></span>님
+					<!-- 							<a href=""	class="notice" title="알림">알림</a> -->
+					<a
+						href="https://kauth.kakao.com/oauth/logout?client_id=b4e15198a92c66541e626d75b50f81ec&logout_redirect_uri=http://localhost:8081/logout">
+						로그아웃 </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="link-area">
+
+			<div th:if="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인한 경우에 보이는 내용 -->
+				<a href="../mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의
+					시네링크</a>
+			</div>
+			<div th:unless="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인하지 않은 경우에 보이는 내용 -->
+				<a href="#" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">로그인</a>
+			</div>
+		</div>
+		
+		
+		<div class="link-area">
+			<a href="#layer_sitemap" class="header-open-layer btn-layer-sitemap" title="사이트맵">사이트맵</a>
+			<a href="#layer_header_search" class="header-open-layer btn-layer-search" title="검색">검색</a>
+			<a href="/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a>
+			
+			<div th:if="${session.loginid == null and session.kakaoemail == null}">
+				<a href="#layer_mymega2" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.loginid != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.kakaoemail != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			
+		</div>
+
+		<nav id="gnb" class="">
+			<ul class="gnb-depth1">
+				<li class="gnb_menu">
+					<a href="../movieDetail/movie" class="gnb-txt-movie" title="영화">영화</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="../booking/cineReserve" id="reserve" class="gnb-txt-reserve" title="예매" >예매</a>
+					<!--<a href="#" id="reserve" class="gnb-txt-reserve" title="예매">예매</a>-->
+				</li>
+				<li class="gnb_menu">
+					<a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="/store" class="gnb-txt-store" title="스토어">스토어</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	
+	
+<body>
+	<h2>좋아요</h2>
+
+</body>
+</html>

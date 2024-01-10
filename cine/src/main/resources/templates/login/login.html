@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login</title>
+<link rel="stylesheet" type="text/css" th:href="@{../../static/login/css/style.css}">
+</head>
+<body>
+<!-- 로그인 실패 시 로그인 폼 -->
+	<h2>로그인에 실패하셨습니다.</h2>
+    <form action="/member/login" method="post">
+        <label for="memberId">아이디:</label>
+        <input type="text" id="memId" name="memId" required><br><br>
+        
+        <label for="password">비밀번호:</label>
+        <input type="password" id="memPw" name="memPw" required><br><br>
+        
+        <button  type="submit">로그인</button>
+    </form>
+    
+    <br><br>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>store</title>
+    
+	<link rel="stylesheet" href="/store/css/cineStoreDetail.css" media="all">
+	<script src="/store/js/cineStoreDetail.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <header id="header" class="main-header no-bg">
+		<h1 class="ci">
+			<a href="/" title="cineLink 메인으로 가기">CINELINK : Life Theater</a>
+		</h1>
+
+		<div class="util-area">
+			<div class="left-link">
+				<a href="/benefit/viplounge" title="VIP LOUNGE">VIP LOUNGE</a>
+				<a href="/benefit/membership" title="멤버십">멤버십</a>
+				<a href="/support" title="고객센터">고객센터</a>
+			</div>
+			
+			<div class="right-link">
+				<!-- 로그인전 -->
+				<div th:if="${session.loginid == null and session.kakaoemail == null}">
+					<div class="booking-form">
+						<div class="before">
+							<a href="#" onclick="openModal()">로그인</a> <a href="../login/save" title="회원가입">회원가입</a>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 창을 include -->
+				<div th:include="login/modal"></div>
+
+				<!-- 로그인후 -->
+				<div th:if="${session.loginid != null}">
+					<a href="/logout" class="after">로그아웃</a>&nbsp; <span th:text="${session.loginid}"></span>님
+					<!-- 						 <a href=""	class="notice" title="알림">알림</a> -->
+				</div>
+				<div th:if="${session.kakaoemail != null}">
+					&nbsp; <span th:text="${session.kakaoname}"></span>님
+					<!-- 							<a href=""	class="notice" title="알림">알림</a> -->
+					<a
+						href="https://kauth.kakao.com/oauth/logout?client_id=b4e15198a92c66541e626d75b50f81ec&logout_redirect_uri=http://localhost:8081/logout">
+						로그아웃 </a>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="link-area">
+
+			<div th:if="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인한 경우에 보이는 내용 -->
+				<a href="../mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의
+					시네링크</a>
+			</div>
+			<div th:unless="${session.loginid != null or session.kakaoemail != null}">
+				<!-- 사용자가 로그인하지 않은 경우에 보이는 내용 -->
+				<a href="#" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">로그인</a>
+			</div>
+		</div>
+		
+		
+		<div class="link-area">
+			<a href="#layer_sitemap" class="header-open-layer btn-layer-sitemap" title="사이트맵">사이트맵</a>
+			<a href="#layer_header_search" class="header-open-layer btn-layer-search" title="검색">검색</a>
+			<a href="/booking/timetable" class="link-ticket" title="상영시간표">상영시간표</a>
+			
+			<div th:if="${session.loginid == null and session.kakaoemail == null}">
+				<a href="#layer_mymega2" class="header-open-layer btn-layer-mymega" title="나의 시네링크" onclick="openModal()">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.loginid != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			<div th:if="${session.kakaoemail != null}">
+				<a href="/mypage/mypage" class="header-open-layer btn-layer-mymega" title="나의 시네링크">나의 시네링크</a>
+			</div>
+			
+			
+		</div>
+
+		<nav id="gnb" class="">
+			<ul class="gnb-depth1">
+				<li class="gnb_menu">
+					<a href="../movieDetail/movie" class="gnb-txt-movie" title="영화">영화</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="../booking/cineReserve" id="reserve" class="gnb-txt-reserve" title="예매" >예매</a>
+					<!--<a href="#" id="reserve" class="gnb-txt-reserve" title="예매">예매</a>-->
+				</li>
+				<li class="gnb_menu">
+					<a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+				</li>
+				<li class="gnb_menu">
+					<a href="/store" class="gnb-txt-store" title="스토어">스토어</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	
+    
+    
+<!-- <div id="bodyContent"> -->
+        
+<script type="text/javascript">
+// Tab Index
+/* var prdtClCd = '';
+
+$(function(){
+    //스토어 메인 상품정보 조회
+    fn_storeMainSerach();
+});
+*/
+//스토어 메인 상품정보 조회
+function fn_storeMainSerach(){
+    var paramData = {'prdtcd' : prdtcd};
+
+    if (prdtcd == null || prdtcd == '')
+    {
+        $.ajax({
+            url: "/storeDetail",
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(paramData),
+            success: function (data, textStatus, jqXHR) {
+                $("#storeMainList").empty();
+                $("#storeMainList").append(data);
+            },
+            error: function(xhr,status,error){
+                 var err = JSON.parse(xhr.responseText);
+                 alert(xhr.status);
+                 alert(err.message);
+            }
+        });
+    }
+    else
+    {
+        $.ajax({
+            url: "/storeDetail",
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(paramData),
+            success: function (data, textStatus, jqXHR) {
+                $("#storeMainList").empty();
+                $("#storeMainList").append(data);
+            },
+            error: function(xhr,status,error){
+                 var err = JSON.parse(xhr.responseText);
+                 alert(xhr.status);
+                 alert(err.message);
+            }
+        });
+    }
+
+}
+
+//상세페이지 이동
+function fn_storeDetail(prdtNo){
+
+	var contentUrl = "/storeDetailInfo="+prdtcd;
+
+    //$("#storeForm").append("<input type='hidden' name='cmbndKindNo' value='" + cmbndKindNo + "' />");
+    $("#storeForm").append("<input type='hidden' name='postAt' value='Y' />");
+    //$("#storeForm").attr("action",contentUrl+"?cmbndKindNo="+cmbndKindNo);
+    $("#storeForm").attr("action",contentUrl);
+    //$("#storeForm").submit();
+	//넷퍼넬 적용
+    $("#storeForm").submit();
+} 
+
+</script>
+
+<form id="storeForm" name="storeForm" method="post">
+</form>
+
+<div class="container">
+    <div class="page-util">
+        <div class="inner-wrap">
+            <div class="location">
+                <span>Home</span>
+                <a href="/store" title="스토어">스토어</a>
+            </div>
+        </div>
+    </div>
+    <div id="storeMainList"></div>
+
+<div id="storeMainList">
+
+<div id="contents">
+    <div class="inner-wrap">
+
+        <!-- store-view -->
+        <div class="store-view">
+
+            <h2 class="tit">제목</h2>
+
+            <div class="sub-info">
+                <p class="bundle">상세 소개</p>
+                
+                    <p class="date">
+                        <span>판매기간</span>
+                        <em>2023.10.07 ~ 2023.11.21</em>
+                    </p>
+                
+            </div>
+
+            <!-- box-store-view -->
+            <div class="box-store-view">
+                <div class="left">
+                    <div class="img">
+                        
+                        <p><img src="https://img.megabox.co.kr/SharedImg/store/2023/09/25/GIifu3SbEGeNZnrbtS7kYUoOUUHia18F_280.jpg" alt="일반예매_[지젤 스페셜 패키지] LYNK-POP : THE 1st VR CONCERT aespa" onerror="noImg(this);"></p>
+                    </div>
+
+                    <p class="origin">
+                    </p>
+                </div>
+
+                <!-- right -->
+                <div class="right">
+                    <!-- goods-info -->
+                    <div class="goods-info">
+                        <div class="line">
+                            <span class="tit">유효기간</span>
+                            <div class="cont">
+                                <span class="txt">2023.10.07 ~ 2023.11.21 사용 가능</span>
+                                <p></p>
+                            </div>
+                        </div>
+                        
+                        <div class="line">
+                                <p class="tit">구매 후 취소</p>
+                                <div class="cont">
+                                    <p class="txt">
+                                            2023.11.21 이내 취소 가능하며, 부분취소는 불가능합니다.
+                                    </p>
+                                    <p class="txt min">굿즈 수령 후에는 구매 취소 및 환불 요청이 불가합니다.</p>
+                                </div>
+                        </div>
+                    </div>
+                    <!--// goods-info -->
+
+                    <!--
+                        판매종료일때는 각 select, button 에 disabled 처리
+                    -->
+                    <!-- type -->
+                    <div class="type">
+                        <!-- 수량 금액 일 때 -->
+
+                        <!--// 수량 금액 일 때 -->
+
+						<!-- 기프트카드  -->
+
+                        <div class="receipt">
+                            
+                            <div class="line">
+                                <p class="tit"><span class="line32">금액</span></p>
+
+                                <div class="cont">
+                                    <div class="money">
+                                        <em id="prdtSumAmt">가격</em>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--// type -->
+
+                    <div class="btn-group">
+                      <a href="#" id="btnPurc" class="button purple large" w-data="500" h-data="410" title="구매">장바구니에 담기</a>
+						            
+                    </div>
+                </div>
+                <!--// right -->
+            </div>
+            <!--// box-store-view -->
+        </div>
+        
+            <!-- box-pulldown -->
+            <div class="box-pulldown">
+                <div class="tit">
+                    <button type="button" class="btn-toggle">구매 후 취소 <i class="iconset ico-arr-toggle-down"></i></button>
+                </div>
+            	<div class="dotList02">
+                    
+                        <ul>
+	<li>본 권은&nbsp;23년 11월 21일 (화)까지 사용 가능하며, 특별 콘텐트 상품으로 유효기간 연장이 불가합니다.</li>
+	<li>본 권은 23년 11월 21일 (화)까지&nbsp;취소 가능합니다.</li>
+	<li>구매 취소 및 환불 요청은 미사용 관람권에 한해 가능하며, 굿즈 수령 후에는 구매 취소 및 환불 요청이 불가합니다.</li>
+	<li>본 권은 일괄 환불만 가능하며, 부분 환불 불가합니다.</li>
+	<li>공정거래위원회에서 고시한 소비자분쟁해결기준(신유형 상품권)에 따라 미사용 관람권 중 유효기간은 경과하였으나 상사 채권 소멸시효(5년)이내 상품권에 대해서는 구매액의 100분의 90(90%) 반환하는 규정에 따라 환불을 도와드리고 있습니다. (접수처 : 1544-0070)&nbsp;</li>
+</ul>
+                    
+            	</div>
+            </div>
+            <!--// box-pulldown -->
+            
+            <!-- box-pulldown -->
+            <div class="box-pulldown">
+                <div class="tit">
+                    <button type="button" class="btn-toggle">상품이용안내 <i class="iconset ico-arr-toggle-down"></i></button>
+                </div>
+                <div class="dotList02">
+                    
+                        <ul>
+	<li>본 권은 구매 시 계정으로 자동 등록되며, 등록된 계정에서만 사용 가능합니다.<br>
+	(단,&nbsp;선물 받은 PIN번호는 계정 내 스토어 교환권 등록 후 사용 가능합니다.)</li>
+	<li>본 권은&nbsp;LYNK-POP : THE 1st VR CONCERT aespa 전용 스토어교환권입니다.</li>
+	<li>본 권은 23년 11월 21일 (화)까지 사용 가능하며, 특별 콘텐트&nbsp;상품으로 유효기간 연장이 불가합니다.</li>
+	<li>본 권은 메가박스 코엑스 지점에서만 사용 가능합니다.</li>
+	<li>본 권은 카카오 알림톡을 통해 전송 됩니다. (카카오톡 미설치 또는 미수신 고객은 MMS로 발송)</li>
+	<li>본 권을 이용하여 메가박스 홈페이지, 어플에서 VR콘서트 좌석을 예매할 수 있습니다. (전화, 현장 매표소, 무인발권기 예매 불가)<br>
+	- 일반예매기간&nbsp;:&nbsp;23년 10월 7일&nbsp;(토) 10:00 ~ 11월 21일 (화) 23:59 (매진 시 조기종료 될 수 있음)<br>
+	- 예매방법 : LYNK-POP : THE 1st VR CONCERT aespa 선택 → 관람일시 및 좌석 선택 → 결제하기 페이지에서 관람권/모바일상품권 선택 → 등록된 스토어교환권 적용 → 결제<br>
+	(단, 선물받은 스토어교환권은 관람권/모바일상품권에서 전송받은 PIN번호 16자리를 입력하여 등록한 후에 사용이 가능합니다.)</li>
+	<li>LYNK-POP : THE 1st VR CONCERT aespa는 VR헤드셋을 착용한 상태로 진행되는 콘텐트로, 상영관 내 음식물 반입이 어려운 점 양해 부탁드립니다.</li>
+	<li>LYNK-POP : THE 1st VR CONCERT aespa는 안경을 착용하실 경우 헤드셋 사용에 어려움이 있을 수 있어 콘택트 렌즈를 착용하고 방문하시면 더 좋은 경험을 즐기실 수 있습니다.</li>
+	<li>본 VR콘서트는 특별콘텐트로 메가박스 포인트 적립이 불가합니다.</li>
+	<li>본 권은 설정된 유효기간보다 상영이 조기 종료될 수 있습니다.</li>
+</ul>
+                    
+				</div>
+            </div>
+            <!--// box-pulldown -->
+        
+
+    </div>
+</div>
+
+</div>
+</div>
+</body>
+</html>

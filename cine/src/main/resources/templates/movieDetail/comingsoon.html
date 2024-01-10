@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:url" id="fbUrl" content="https://www.megabox.co.kr/movie">
+    <title>Document</title>
+    <link rel="stylesheet" href="/movieDetail/css/movie.css" media="all">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/movieDetail/js/megabox.api.min.js"></script>
+    <script src="/movieDetail/js/front.js"></script>
+</head>
+
+<body>
+<script src="/movieDetail/js/moviecom.js"></script>
+
+    <div class="body-wrap">
+        <!-- header -->
+        <header id="header">
+            <h1 class="ci"><a href="/" title="CINELINK 메인으로 가기">CINELINK : MEET PLAY SHARE</a></h1>
+
+            <div class="util-area">
+                <div class="right-link">
+                    <!-- 로그인전 -->
+                    <div class="before" style>
+                        <a href="javaScript:fn_viewLoginPopup('default','pc')" title="로그인">로그인</a>
+                        <a href="/join" title="회원가입">회원가입</a>
+                    </div>
+
+                    <!-- 로그인후 -->
+                    <div class="after" style="display:none">
+                        <a href="/on/oh/ohg/MbLogin/mbLogout.do" class="" title="로그아웃">로그아웃</a>
+                        <a href="" class="notice" title="알림">알림</a>
+                    </div>
+                    <a href="/booking">빠른예매</a>
+                </div>
+            </div>
+
+            <!--마크업-->
+            <div class="link-area">
+                <a href="#layer_sitemap" class="header-open-layer btn-layer-sitemap" title="사이트맵">사이트맵</a>
+                <a href="#layer_header_search" class="header-open-layer btn-layer-search" title="검색">검색</a>
+                <a href="#layer_mymega2" class="header-open-layer btn-layer-mymega" title="나의 메가박스">나의 메가박스</a>
+            </div>
+
+            <nav id="gnb">
+                <ul class="gnb-depth1">
+                    <li><a href="movie" class="gnb-txt-movie" title="영화">영화</a>
+                        <div class="gnb-depth2">
+                            <ul>
+                                <li><a href="movie" title="전체영화">전체영화</a></li>
+
+
+                                <li><a href="/curation/specialcontent" title="큐레이션">큐레이션</a></li>
+
+                                <li id="festivalArea" style="display: none;"><a href="/festival" title="영화제">영화제</a>
+                                </li>
+                                <li><a href="/moviepost/all" title="무비포스트">무비포스트</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/booking" class="gnb-txt-reserve" title="예매">예매</a>
+                        <div class="gnb-depth2">
+                            <ul>
+                                <li><a href="/booking" title="빠른예매">빠른예매</a></li>
+                                <li><a href="/booking/timetable" title="상영시간표">상영시간표</a></li>
+                                <li><a href="/booking/privatebooking" title="더 부티크 프라이빗 예매">더 부티크 프라이빗 예매</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+                        <div class="gnb-depth2">
+                            <ul>
+                                <li><a href="/event" title="진행중 이벤트">진행중 이벤트</a></li>
+                                <li><a href="/event/end" title="지난 이벤트">지난 이벤트</a></li>
+                                <li><a href="/event/winner/list" title="당첨자발표">당첨자발표</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li><a href="/store" class="gnb-txt-store" title="스토어">스토어</a></li>
+                </ul>
+            </nav>
+        </header>
+        <!--// gnb -->
+
+        <!-- container -->
+        <div class="container">
+            <div class="page-util">
+                <div class="inner-wrap">
+                    <div class="location">
+                        <span>Home</span>
+                        <a href="movie.html" title="영화 페이지로 이동">영화</a>
+                        <a href="movie.html" title="전체영화 페이지로 이동">전체영화</a>
+                    </div>
+                </div>
+            </div>
+            <!-- contents -->
+            <div id="contents">
+                <!-- inner-wrap -->
+                <div class="inner-wrap">
+                    <h2 class="tit">전체영화</h2>
+                    <div class="tab-list fixed">
+                        <ul id="topMenu">
+                            <li><a href="movie" title="박스오피스 탭으로 이동">박스오피스</a></li>
+                            <li class="on"><a href="comingsoon" title="상영예정작 탭으로 이동">상영예정작</a></li>
+                        </ul>
+                    </div>
+ 
+                    <!-- movie-list-util -->
+                    <div class="movie-list-util mt40">
+                        <!-- 박스오피스 -->
+                        <div class="topSort"  style="display: none;">
+                            <div class="movie-sorting sortTab">
+                                <!-- <span><button type="button" class="btn on" sort-type="ticketing">예매율순</button></span> -->
+                                <!-- <span><button type="button" class="btn" sort-type="accmAdnc">누적관객순</button></span> -->
+                                <!-- <span><button type="button" class="btn" sort-type="megaScore">메가스코어순</button></span> -->
+                            </div>
+                        </div>
+                        <!--// 박스오피스 -->
+
+                        <!-- 상영예정작 -->
+                        <div class="topSort" style="display: block;">
+					        <div class="movie-sorting sortTab">
+						        <span><button type="button" class="btn on" sort-type="rfilmDe">개봉일순</button></span>
+						        <span><button type="button" class="btn" sort-type="title">가나다순</button></span>
+					        </div>
+				        </div>
+                        <!--// 상영예정작 -->
+
+                        <!-- 장르모아보기 -->
+                        <div class="topSort" style="display: none;">
+                            <div class="movie-sorting sortTab">
+                                <span><button type="button" class="btn on" sort-type="ticketing">예매율순</button></span>
+                                <span><button type="button" class="btn" sort-type="accmAdnc">누적관객순</button></span>
+                                <span><button type="button" class="btn" sort-type="megaScore">메가스코어순</button></span>
+                            </div>
+
+                            <div class="onair-condition">
+                                <button type="button" title="개봉작만 보기" class="btn-onair btnOnAir">개봉작만</button>
+                            </div>
+                        </div>
+                        <!--// 장르모아보기 -->
+
+                        <!-- 검색결과 없을 때 -->
+                        <p class="no-result-count"><strong id="totCnt">0</strong>개의 영화가 검색되었습니다.</p>
+                        <!--// 검색결과 없을 때 -->
+
+                        <div class="movie-search">
+                            <input type="text" title="영화명을 입력하세요" id="ibxMovieNmSearch" name="ibxMovieNmSearch"
+                                placeholder="영화명 검색" class="input-text" />
+                            <button type="button" class="btn-search-input" id="btnSearch">검색</button>
+                        </div>
+                    </div>
+                    <!--// movie-list-util -->
+
+                    <div class="bg-loading" style="display: none;">
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+
+                    <div class="movie-list">
+                        <ol class="list" id="movieList"></ol>
+                    </div>
+
+                    <div class="btn-more v1" id="addMovieDiv" style="display: none;">
+                        <button type="button" class="btn" id="btnAddMovie">더보기 <i
+                                class="iconset ico-btn-more-arr"></i></button>
+                    </div>
+
+                    <!-- 검색결과 없을 때 -->
+                    <div class="movie-list-no-result" id="noDataDiv" style="display: none;">
+                        <p>현재 상영중인 영화가 없습니다.</p>
+                    </div>
+
+
+                    <!-- 검색결과 없을 때 -->
+                    <div class="movie-list-no-favor" id="noMyGenre" style="display: none;">
+                        <p>선호장르가 등록되지 않았습니다. 선호하시는 장르를 등록해보세요.</p>
+                        <div class="btn-group center">
+                            <a href="/mypage/additionalinfo" class="button large purple"
+                                title="선호장르설정하기 페이지로 이동">선호장르설정하기</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--// container -->
+
+
+                <div class="movie-list">
+                    <div class="inner-wrap">
+                    
+                    
+                        <!--// movie-list -->
+
+                        <div class="btn-more v1" id="addMovieDiv" style>
+                            <button type="button" class="btn" id="btnAddMovie">더보기 <i
+                                    class="iconset ico-btn-more-arr"></i></button>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- </div> -->
+
+        <div class="quick-area" style="display: block;">
+            <a href="" class="btn-go-top" title="top" style="position: absolute;">top</a>
+        </div>
+
+        <!-- footer -->
+        <footer id="footer">
+            <!-- footer-top -->
+            <div class="footer-top">
+                <div class="inner-wrap">
+                    <ul class="fnb">
+                        <li><a href="/megaboxinfo" title="회사소개 페이지로 이동"> 회사소개 </a></li>
+                        <li><a href="/recruit" title="인재채용 페이지로 이동"> 인재채용 </a></li>
+                        <li><a href="/socialcontribution" title="사회공헌 페이지로 이동"> 사회공헌 </a></li>
+                        <li><a href="/partner" title="제휴/광고/부대사업문의 페이지로 이동"> 제휴/광고/부대사업문의 </a></li>
+                        <li><a href="/support/terms" title="이용약관 페이지로 이동"> 이용약관 </a></li>
+                        <li><a href="/support/lcinfo" title="위치기반서비스 이용약관 페이지로 이동"> 위치기반서비스 이용약관 </a></li>
+                        <li class="privacy"><a href="/support/privacy" title="개인정보처리방침 페이지로 이동"> 개인정보처리방침 </a></li>
+                        <li><a href="https://jebo.joonganggroup.com/main.do" target="_blank" title="윤리경영 페이지로 이동"> 윤리경영
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+            <!--// footer-top -->
+
+            <!-- footer-bottom -->
+            <div class="footer-bottom">
+                <div class="inner-wrap">
+                    <div class="ci">CINELINK : MEET PLAY SHARE</div>
+                    <div class="footer-info">
+                        <div>
+                            <address>서울특별시 마포구 양화로 122 LAB7 빌딩 3층, 4층(에이콘 아카데미)</address>
+                            <p>TEL 02-2231-6412</p>
+                        </div>
+                        <p>대표자명 윤장걸</p>
+                        <p>&middot; 개인정보보호책임자 박건호</p>
+                        <p>&middot; 사업자등록번호 000-00-00000</p>
+                        <p>&middot; 통신판매업신고번호 2023-서울마포-0000</p>
+                        <p class="copy">COPYRIGHT &copy; CINELINKJoongAng, Inc. All rights reserved</p>
+                    </div>
+
+                    <div class="footer-sns">
+                        <a href="https://www.youtube.com/onmegabox" target="_blank" title="MEGABOX 유튜브 페이지로 이동">
+                            <i class="iconset ico-youtubeN">유튜브</i>
+                        </a>
+                        <a href="http://instagram.com/megaboxon" target="_blank" title="MEGABOX 인스타그램 페이지로 이동">
+                            <i class="iconset ico-instagramN">인스타그램</i>
+                        </a>
+                        <a href="https://www.facebook.com/megaboxon" target="_blank" title="MEGABOX 페이스북 페이지로 이동">
+                            <i class="iconset ico-facebookN">페이스북</i>
+                        </a>
+                        <a href="https://twitter.com/megaboxon" target="_blank" title="MEGABOX 트위터 페이지로 이동">
+                            <i class="iconset ico-twitterN">트위터</i>
+                        </a>
+                    </div>
+                    <!--// footer-bottom -->
+
+                </div>
+            </div>
+        </footer>
+    </div>
+    </div>
+    </div>
+    <!—// footer —>
+
+    </div>
+    <form id="mainForm"> </form>
+       
+</body>
+
+</html>

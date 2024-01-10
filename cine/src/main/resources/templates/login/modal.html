@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<link rel="stylesheet" type="text/css" th:href="@{../../login/css/modal.css}">
+<script src="../../login/js/modal.js"></script>
+
+<body>
+	<div th:if="${session.loginid == null and session.kakaoemail == null}">
+		<!-- <a href="#" onclick="openModal()">모달</a> -->
+		<div id="myModal" class="modal">
+			<div class="modal-content"  style="border-radius: 5%;">
+
+				<div class="modal-content-wrapper">
+					<!--로그인-->
+					<button class="tab-button" onclick="showTab('loginTab')">회원 로그인</button>
+					<button class="tab-button" onclick="showTab('nonmemberTab')">비회원 로그인</button>
+					<div id="loginTab" class="tab">
+						<!-- 회원 로그인 창 -->
+						<form action="/member/login" method="post">
+							<label for="memberId">아이디:</label> <input type="text" id="memId" name="memId" required><br>
+							<br> <label for="password">비밀번호:</label> <input type="password" id="memPw" name="memPw"
+								required><br> <br>
+
+							<button type="submit" class="tab-button" style=" text-align: center !important; margin-bottom: 50px; width:50%;" >로그인</button>
+							<hr>
+							<p>간편 로그인</p>
+							<a	style="width: 100% !important; display: inline !important; float: none !important; "
+							
+								href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=d71369d0800a2ee977fca54cda41a9dd&redirect_uri=http://localhost:8081/auth/kakao/callback"><br>
+								<img src="/login/images/kakao_login_medium_narrow.png"> </a><br>
+						</form>
+
+					</div>
+
+					<div id="nonmemberTab" class="tab">
+						<!-- <h4>비회원 로그인 창</h4> -->
+						<div class="container">
+							<div class="form-container">
+								<h2>비회원 예매 정보 입력</h2>
+								<form action="/reservation/submit" method="post">
+
+									<!-- 이름 입력 필드 -->
+									<div>
+										<label for="name">이름:</label> <input type="text" id="name" name="name" required>
+									</div>
+
+									<!-- 생년월일 입력 필드 -->
+									<div>
+										<label for="birthdate">생년월일:</label> <input type="date" id="birthdate"
+											name="birthdate" required>
+									</div>
+
+									<!-- 휴대폰 번호 입력 필드 -->
+									<div>
+										<label for="phoneNumber">휴대폰 번호:</label> <input type="tel" id="phoneNumber"
+											name="phoneNumber" required>
+									</div>
+
+									<!-- 비밀번호 입력 필드 -->
+									<div>
+										<label for="password">비밀번호:</label> <input type="password" id="password"
+											name="password" required>
+									</div>
+
+									<!-- 개인정보 처리방침 동의 여부 -->
+									<div>
+										<label>개인정보 처리방침 동의</label><br> <input type="radio" id="agree"
+											name="privacyAgreement" value="true" required>
+										<label for="agree">동의</label> <input type="radio" id="disagree"
+											name="privacyAgreement" value="false">
+										<label for="disagree">미동의</label>
+									</div>
+
+									<!-- 제출 버튼 -->
+									<div>
+										<button type="submit">예매하기</button>
+									</div>
+								</form>
+							</div>
+							<div class="privacy-policy">
+								<h2>개인정보 처리방침</h2>
+								<p>
+									<strong>수집목적:</strong> 비회원 예매 서비스 제공 / 이용자식별 / 구매 및 결제
+								</p>
+								<p>
+									<strong>수집항목:</strong> 이름, 생년월일, 휴대폰번호, 비밀번호
+								</p>
+								<p>
+									<strong>보유기간:</strong> 관람 또는 취소 후 7일 이내
+								</p>
+								<p>정보수집에 동의를 거부할 수 있으며, 동의하지 않을 경우 비회원 예매서비스를 이용하실 수 없습니다.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<span onclick="closeModal()" class="close">닫기</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

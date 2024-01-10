@@ -1,0 +1,674 @@
+
+
+
+
+
+
+<!doctype html>
+<!--[if lt IE 10]><html class="lt-ie9" lang="ko"><![endif]-->
+<!--[if gt IE 9]><!--><html lang="ko"><!--<![endif]-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="/mypage/js/loginCheck.js"></script>
+
+
+
+
+		<title>MEET PLAY SHARE, 메가박스</title>
+
+</head>
+
+    	<link rel="stylesheet" href="/mypage/css/mypage.css" media="all">
+    	<script src="\mypage\js/moviestory.js"></script>
+
+
+
+<body>
+    <div class="skip" title="스킵 네비게이션">
+        <a href="#contents"	title="본문 바로가기">본문 바로가기</a>
+        <a href="#footer"	title="푸터 바로가기">푸터 바로가기</a>
+    </div>
+    <div class="body-wrap">
+        
+
+
+
+
+
+
+
+
+<!-- <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> -->
+<script src="/static/mb/js/hmac-sha256.js"></script>
+<script src="/static/mb/js/enc-base64-min.js"></script>
+<script src="/js/megabox-simpleBokd.js"></script>
+<script type="text/javascript">
+
+</script>
+
+
+
+
+<!-- header -->
+<header id="header" >
+    <h1 class="ci"><a href="/" title="MEGABOX 메인으로 가기">MEGABOX : Life Theater</a></h1>
+
+	<!-- ie-update : ie 9 이하 일때만 출력 -->
+	<div class="ie-update">
+		<div class="dimd"></div>
+		<div class="wrap">
+			<p class="tit">
+				<img src="../../../static/pc/images/ie/txt-update.png" alt="megabox 홈페이지는 internet explrer10이상에서 최적화된 서비스 이용이 가능합니다. ie9 이하에서는 예매가 정상적으로 진행되지 않을 수 있으니, 브라우저를 업그레이드하시거나 다른 예매수단을 이용해 주세요!" />
+			</p>
+
+			<div class="box">
+				<div class="col">
+					<p class="txt">브라우저를 최신 버전으로<br>업그레이드 해보세요!</p>
+
+					<div class="link">
+						<a href="https://www.microsoft.com/ko-kr/download/internet-explorer.aspx" title="internet explorer 새 버전 다운로드" target="_blank">
+							<img src="../../../static/pc/images/ie/btn-ie.png" alt="internet explorer 새 버전 다운로드" />
+						</a>
+					</div>
+
+					<div class="link">
+						<a href="http://www.google.com/chrome?hl=ko" title="chrome 다운로드" target="_blank">
+							<img src="../../../static/pc/images/ie/btn-chrome.png" alt="chrome 다운로드">
+						</a>
+					</div>
+				</div>
+
+				<div class="col">
+					<p class="txt">megabox 모바일 app을<br>이용해 보세요!</p>
+
+					<div class="link">
+						<a href="https://itunes.apple.com/us/app/megabox/id894443858?l=ko&amp;ls=1&amp;mt=8" title="available on the app store" target="_blank">
+							<img  src="../../../static/pc/images/ie/btn-appstore.png" alt="available on the app store">
+						</a>
+					</div>
+
+					<div class="link">
+						<a href="https://play.google.com/store/apps/details?id=com.megabox.mop&amp;hl=ko" title="available on the google play" target="_blank">
+							<img src="../../../static/pc/images/ie/btn-google.png" alt="available on the google play">
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="close-chk">
+				<input type="checkbox" id="one_month_no_update" />
+				<label for="one_month_no_update" class="ml05">한 달 동안 이 창을 열지 않음</label>
+
+				<button type="button" class="closeDl button purple x-small ml20">닫기</button>
+			</div>
+		</div>
+	</div>
+	<!--// ie-update : ie 9 이하 일때만 출력 -->
+    <!--// 브라우저 다운로드 -->
+
+    <!-- topGnb -->
+    
+
+    <div class="util-area">
+        <div class="left-link">
+            <a href="/benefit/viplounge" 	title="VIP LOUNGE">VIP LOUNGE</a>
+            <a href="/benefit/membership"	title="멤버십">멤버십</a>
+            <a href="/support"				title="고객센터">고객센터</a>
+        </div>
+
+        <div class="right-link">
+            <!-- 로그인전 -->
+            <div class="before" style="display:none">
+                <a href="javaScript:fn_viewLoginPopup('default','pc')" title="로그인">로그인</a>
+                <a href="/join" title="회원가입">회원가입</a>
+            </div>
+
+            <!-- 로그인후 -->
+            <div class="after" style="display:none">
+                <a href="/on/oh/ohg/MbLogin/mbLogout.do" class="" title="로그아웃">로그아웃</a>
+                <a href="" class="notice" title="알림">알림</a>
+
+                <!-- layer-header-notice -->
+				<div class="layer-header-notice">
+					<div class="notice-wrap">
+						<p class="tit-notice">알림함</p>
+
+						<div class="count">
+							<p class="left">전체 <em class="totalCnt">0</em> 건</p>
+
+							<p class="right">* 최근 30일 내역만 노출됩니다.</p>
+						</div>
+
+						<!-- scroll -->
+						<div class="scroll m-scroll">
+							<ul class="list">
+								<li class="no-list">
+									알림 내역이 없습니다.
+								</li>
+							</ul>
+						</div>
+						<div class="notice-list-more">
+							<button type="button" class="button btn-more-notice-list">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+						</div>
+						<!--// scroll -->
+						<button type="button" class="btn-close-header-notice">알림 닫기</button>
+					</div>
+					<!--// notice-wrap -->
+				<!--// layer-header-notice -->
+				</div>
+
+            </div>
+			<a href="/logout">로그아웃</a>
+            <a href="/booking">빠른예매</a>
+        </div>
+    </div>
+
+    <div class="link-area">
+        <a href="#layer_sitemap" 		class="header-open-layer btn-layer-sitemap"	title="사이트맵">사이트맵</a>
+        <a href="#layer_header_search" 	class="header-open-layer btn-layer-search"	title="검색">검색</a>
+        <a href="/booking/timetable" 	class="link-ticket" 						title="상영시간표">상영시간표</a>
+        <a href="/mypage" 		class="header-open-layer btn-layer-mymega" 	title="나의 메가박스">나의 메가박스</a>
+    </div>
+
+    <!-- gnb -->
+    
+    <nav id="gnb">
+        <ul class="gnb-depth1">
+            <li><a href="/movieDetail/movie" class="gnb-txt-movie" title="영화">영화</a>
+
+            </li>
+            <li><a href="/booking/cineReserve" id="reserve" class="gnb-txt-reserve" title="예매">예매</a>
+            </li>
+            <li><a href="/theater/list" class="gnb-txt-theater" title="극장">극장</a>
+
+            </li>
+            <li><a href="/event" class="gnb-txt-event" title="이벤트">이벤트</a>
+ 
+            </li>
+            <li><a href="/store" class="gnb-txt-store" title="스토어">스토어</a></li>
+            <li><a href="/benefit/membership" class="gnb-txt-benefit" title="혜택">혜택</a>
+            </li>
+        </ul>
+    </nav>
+  
+
+</header>
+<!--// header -->
+
+
+        <div class="container has-lnb">
+            <div class="page-util">
+                 <div class="inner-wrap" id="myLoaction"></div>
+            </div>
+
+            <div class="inner-wrap">
+                
+
+	<div class="lnb-area">
+		<nav id="lnb">
+			<p class="tit"><a href="/mypage" title="나의 메가박스">나의 메가박스</a></p>
+
+			<ul>
+				<li class=""><a href="/mypage/bookinglist" title="예매/구매내역">예매/구매내역</a></li>
+				
+				<li><a href="/mypage/moviestory">나의 무비스토리</a></li> 
+				<li>
+					<a href="/mypage/myinfo?returnURL=info" title="회원정보">회원정보</a>
+					<ul class="depth3">
+						<li><a href="/mypage/myinfo" title="개인정보 수정">개인정보 수정</a></li>
+						<li><a href="/mypage/additionalinfo" 		title="선택정보 수정">선택정보 수정</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+
+<form id="movieForm" method="post">
+	<input type="hidden" id="currentPage" value="">
+	<input type="hidden" id="recordCountPerPage" value="10">
+</form>
+
+<!-- contents -->
+
+<div id="myLoactionInfo" style="display: none;">
+	<div class="location">
+		<span>Home</span>
+		<a href="/mypage" title="나의 메가박스 페이지로 이동">나의 메가박스</a>
+		<a href="/mypage/moviestory" title="나의 무비스토리 페이지로 이동">나의 무비스토리</a>
+	</div>
+</div>
+
+<div id="contents">
+	<h2 class="tit">나의 무비스토리</h2>
+
+	
+
+	<div class="tab-block mb30">
+		<ul>
+			<li data-url="/mypage/moviestory?cd=tl" ><a id="movieTimeLineTab" href="#" class="btn" data-type="tl" title="무비타임라인 탭으로 이동">무비타임라인</a></li>
+			<li data-url="/mypage/moviestory?cd=mp" ><a href="#" class="btn" data-type="mp" title="무비포스트 탭으로 이동">무비포스트</a></li>
+			<li data-url="/mypage/moviestory?cd=one"><a href="#" class="btn" data-type="one" title="관람평 탭으로 이동">관람평</a></li>
+			<li data-url="/mypage/moviestory?cd=sm" ><a href="#" class="btn" data-type="sm" title="본영화 탭으로 이동">본영화</a></li>
+			<li data-url="/mypage/moviestory?cd=lm" ><a href="#" class="btn" data-type="lm" title="보고싶어 탭으로 이동">보고싶어</a></li>
+		</ul>
+	</div>
+
+<!--########################### 나의 무비타임라인 ########################################-->
+	<div class="my-timeline myTimeline myMovieStory">
+		
+			 <!-- main-movie-list -->
+                  <div class="main-movie-list">
+                     <ol class="list">
+                        <!-- 3개의 list를  loop 한다-->
+                        <!-- 박스오피스 시작 -->
+                        <!-- 각 map 별 첫번째 li 에 first클래스 추가 -->
+
+
+                     </ol>
+                  </div>
+			
+<!--########################### 나의 무비타임라인 ########################################-->
+			<button type="button" class="btn-year year-prev">이전 년도 선택</button>
+
+			<div class="time-year">
+				<div class="swiper-wrapper">
+					
+						<!-- <div class="cell swiper-slide"><button type="button" class="btn">2007</button></div> -->
+						<div class="cell swiper-slide">
+							<button type="button" class="btn on" data-no="2023">2023</button>
+						</div>
+					
+				</div>
+			</div>
+
+			<button type="button" class="btn-year year-next">다음 년도 선택</button>
+		
+	</div>
+
+	<!-- my-timeline-list -->
+	<div class="my-timeline-list myTimeline myMovieStory">
+		<ol>
+		<ul>
+        <!-- likedMovies에 있는 각 LikeEntity에 대해 반복 -->
+        <li th:each="movie : ${likedMovies}">
+            <!-- LikeEntity의 속성에 접근 -->
+            <span th:text="${movie.movieNo}"></span> - 
+            <span th:text="${movie.member.membid}"></span> - 
+            <span th:text="${movie.likeCount}"></span> - 
+            <span th:text="${#dates.format(movie.likeDate, 'yyyy-MM-dd')}"></span>
+        </li>
+    </ul>
+		</ol>
+	</div>
+	<!--// my-timeline-list -->
+
+	<div class="btn-more v1 pt00 myTimeline myMovieStory" style="display: none;">
+		<button type="button" class="btn" id="addList">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+	</div>
+	<!--// 나의 무비타임라인 -->
+
+	<!-- 나의 무비포스트 -->
+	<div class="my-movie-post myMoviePost myMovieStory">
+		<div class="tab-sorting mb20">
+			<button type="button" class="on" data-type="my">나의 포스트</button>
+			<button type="button" data-type="mySubscribe">구독중인 포스트</button>
+		</div>
+
+		<!-- movie-list-util -->
+		<div class="movie-list-util">
+			<p class="result-count  line32">
+				<strong>총 <b class="font-gblue" id="myMoviePostCnt">0</b> 건</strong>
+			</p>
+
+			<div class="float-r">
+				<div class="movie-sorting">
+					<span><button type="button" class="btn on" data-type="date">최신순</button></span>
+					<span><button type="button" class="btn" data-type="like">공감순</button></span>
+				</div>
+
+				<div class="movie-search">
+					<input type="text" title="제목, 장르, 감독, 주연배우를 입력하세요" placeholder="제목, 장르, 감독, 주연배우" class="input-text" name="ibxMovieNmSearch" />
+					<button type="button" class="btn-search-input">검색</button>
+				</div>
+			</div>
+		</div>
+		<!--// movie-list-util -->
+
+		<div class="movie-post-list" id="moviePostList"></div>
+
+		<div class="more-movie-list">
+			<button type="button" class="button btn-more-movie-list">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+		</div>
+	</div>
+	<!--// 나의 무비포스트 -->
+
+	<div class="board-list-util myOne myMovieStory">
+		<p class="result-count">
+			<strong>총 <b class="font-gblue" id="myOneCnt">0</b> 건</strong>
+		</p>
+	</div>
+
+	<!-- 나의 한줄평 -->
+	<div class="my-appraisal myOne myMovieStory">
+		<ul id="myAppraisal"></ul>
+	</div>
+
+	<nav class="pagination myOne myMovieStory"></nav>
+	<!--// 나의 한줄평 -->
+
+	<!-- 나의 본영화 -->
+	<div class="mypage-infomation mt20 mySeenMovie myMovieStory">
+		<ul class="dot-list mb20">
+			<!-- <li>본 영화 리스트는 실제 관람한 이력으로 보여지며, 상영일 익일에 자동 노출됩니다.</li> 20190819 -->
+			<li>극장에서 발권하신 티켓 바코드 하단의 거래번호를 통해 본 영화 등록을 하실 수 있습니다.</li>
+			<!-- <li>유료 관람 영화 편수는 ‘나의 메가박스’에서 확인 하실 수 있습니다.</li> -->
+			<li>본영화는 관람한 인원수에 한해 등록이 가능합니다.</li>
+		</ul>
+
+		<div class="btn-group right mySeenMovie myMovieStory">
+			<a href="#saw_movie_regi" class="button btn-modal-open" w-data='600' h-data='470' title="본 영화 등록">본 영화 등록</a>
+		</div>
+	</div>
+
+	<div class="board-list-util mySeenMovie myMovieStory">
+		<p class="result-count">
+			<strong>총 <b class="font-gblue" id="mySeenMovieCnt">0</b> 건</strong>
+		</p>
+	</div>
+
+	<!-- my-saw-movie -->
+	<div class="my-saw-movie mt10 mySeenMovie myMovieStory">
+		<ul id="mySawMovie"></ul>
+	</div>
+	<!--// my-saw-movie -->
+
+	<nav class="pagination mySeenMovie myMovieStory"></nav>
+	<!--// 나의 본영화 -->
+
+	<!--// 나의 보고싶어 -->
+	<!-- my-movie-list -->
+	<div class="my-movie-list myLikeMovie myMovieStory">
+		<div class="board-list-util">
+			<p class="result-count">
+				<strong>총 <b class="font-gblue" id="totalCnt">0</b>건</strong>
+			</p>
+		</div>
+
+		<div class="movie-list myLikeMovie myMovieStory">
+			<ol class="list" id="movieList"></ol>
+		</div>
+
+		<div class="more-movie-list pt30 myLikeMovie myMovieStory">
+			<button type="button" class="button btn-more-like-list">더보기 <i class="iconset ico-btn-more-arr"></i></button>
+		</div>
+
+	</div>
+	<!--// my-movie-list -->
+
+	<!-- 보고싶어 영화 없을 때 -->
+	<div class="no-my-movie-list myLikeMovie myMovieStory" id="noDataDiv">
+		<i class="iconset ico-movie-see"></i>
+		<p>보고싶은 영화를 담아주세요.</p>
+	</div>
+	<!--// 나의 보고싶어 -->
+</div>
+<!--// contents -->
+	<!-- 무비포스트 상세 레이어팝업 -->
+
+
+
+
+
+<!--################# 무비포스트 상세 레이어팝업으로 변경 ###########################  -->
+	<section id="layer_post_detail" class="modal-layer2">
+				<div class="wrap">
+					<header class="layer-header">
+						<h3 class="tit">무비포스트 상세</h3>
+					</header>
+
+					<div class="layer-con">
+
+						<div class="post-detail">
+							<div class="tit-area mb30">
+								<p class="tit">
+								</p>
+
+								<div class="direct-link">
+									<a id="bokdLinkBtn" data-no="" href="" style="display: none;" title="">예매하기</a>
+								</div>
+							</div>
+
+							
+							<div class="user-post-box mb40">
+								<div class="user-post-case">
+									<!-- post-top-area -->
+									<div class="post-top-area">
+										
+										<div class="user-info">
+											<p class="photo">
+												<img src="../../../static/pc/images/movie/img-P-MO-PO0101-user-img01.png" alt="userid80**님의 무비포스트" />
+											</p>
+
+											<p class="user-id">
+												<a href="" title="ID"></a>
+											</p>
+
+											<p class="user-write-time"></p>
+										</div>
+										
+
+										<div class="btn-util">
+											<!-- 구독하기 전 -->
+											<button type="button" class="button x-small gray-line" id="subscribe"></button>
+										</div>
+
+										<!-- post-funtion -->
+										<div class="post-funtion">
+											<div class="wrapper">
+												<button type="button" class="btn-alert mp">옵션보기</button>
+												<!--
+												유저 일때
+												<div class="balloon-space user">
+
+												작성자 일때
+												<div class="balloon-space writer">
+												-->
+												<div class="balloon-space mpost">
+													<div class="balloon-cont">
+
+													</div>
+												</div>
+												<!--// 말풍선 -->
+											</div>
+										</div>
+										<!--// post-funtion -->
+									</div>
+									<!--// post-top-area -->
+
+									<div class="post-cont-area">
+										<!-- post 내용  -->
+										<div class="section-area">
+										</div>
+										<!--// post 내용 -->
+									</div>
+
+									<!-- comment count -->
+									<div class="count">
+										<button type="button" class="btn" arti-no="" >
+											<i title="좋아요 설정 안함" class="iconset ico-like"></i>
+										</button>
+
+									<!-- 코멘트 등록 영역으로 이동 -->
+
+									</div>
+									<!--// comment count -->
+
+
+
+								</div>
+							</div>
+							
+
+							<!-- share -->
+							<div class="btn-post-share">
+<!-- 								<button type="button" title="카카오톡 공유하기" class="btn kakao">카카오톡</button> -->
+								<button type="button" title="페이스북 공유하기" class="btn face">페이스북</button>
+								<button type="button" title="밴드 공유하기" class="btn band">밴드</button>
+								<button type="button" title="트위터 공유하기" class="btn twitter">트위터</button>
+								<button type="button" title="링크 공유하기" class="btn link">링크공유</button>
+							</div>
+							<!--// share -->
+
+						<!-- comment input -->
+				<div class="comment-write mb40" id="rly">
+					<div class="comment-util mb20">
+						<p><span id="rlyCnt">댓글 </span></p>
+						<input type="hidden" id="rlyCntTop" value="">
+						<input type="hidden" id="hdnMoviePostNo" value="">
+					</div>
+
+					<div class="comment" id="input-comment">
+						<textarea class="input-textarea" cols="5" rows="5" id="postRlyCn" title="댓글 입력" name="postRlyCn" maxlength="100"></textarea>
+
+						<div class="comment-function">
+							<p class="reset"><span class="text-count">0</span> / 100</p>
+							<div class="btn">
+								<button type="button" id="btnPostRly">등록</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--// comment input-->
+
+				<!-- comment list -->
+				<div class="comment-list" id="commentList">
+
+				</div>
+				<!--// comment list -->
+
+				<div class="mb50"></div>
+
+						</div>
+					</div>
+					<button type="button" class="btn-modal-close2">레이어 닫기</button>
+				</div>
+			</section>
+			<!-- // ################# 무비포스트 상세 레이어팝업으로 변경 ###########################  -->
+<!-- //무비포스트 상세 레이어팝업 -->
+
+
+            </div>
+        </div>
+        
+
+
+
+<section id="saw_movie_regi" class="modal-layer">
+	<input type="hidden" id="isLogin" value="Y"  />
+	<div class="wrap">
+		<header class="layer-header">
+			<h3 class="tit">본 영화 등록</h3>
+		</header>
+
+		<div class="layer-con">
+			<p class="reset">발권하신 티켓 하단의 거래번호 또는 예매번호를 입력해주세요.</p>
+
+			<div class="pop-gray mt10 mb30">
+				<label for="movie_regi" class="mr10">거래번호 또는 예매번호</label>
+				<input type="text" id="movie_regi" class="input-text w280px numType" maxlength="20" placeholder="숫자만 입력해 주세요" title="티켓 거래번호 입력" />
+				<button class="button gray ml05" id="regBtn">등록</button>
+			</div>
+
+			<div class="box-border v1 mt30">
+				<p class="tit-box">이용안내</p>
+
+				<ul class="dot-list">
+                        <li>극장에서 예매하신 내역을 본 영화(관람이력)로 등록하실 수 있습니다.</li>
+                        <li>예매처를 통해 예매하신 고객님은 극장에서 발권하신 티켓 하단의 온라인 예매번호 <BR>12자리를 입력해주세요.(Yes24, 네이버, 인터파크, SKT, KT, 다음)</li>
+                        <li>본 영화 등록은 관람인원수 만큼 등록가능하며, 동일 계정에 중복등록은 불가합니다.</li>
+                        <li>상영시간 종료 이후 등록 가능합니다.</li>
+                        <li>본 영화로 수동 등록한 내역은 이벤트 참여 및 포인트 추후 적립이 불가합니다.</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="btn-group-fixed">
+			<button type="button" class="button purple close-layer">닫기</button>
+		</div>
+
+		<button type="button" class="btn-modal-close">레이어 닫기</button>
+	</div>
+</section>
+
+<div class="quick-area">
+	<a href="" class="btn-go-top" title="top">top</a>
+</div>
+
+<!-- footer -->
+<footer id="footer">
+    <!-- footer-top -->
+    <div class="footer-top">
+        <div class="inner-wrap">
+            <ul class="fnb">
+                <li><a href="/megaboxinfo" title="회사소개 페이지로 이동">회사소개</a></li>
+                <li><a href="/recruit" title="인재채용 페이지로 이동">인재채용</a></li>
+                <li><a href="/socialcontribution" title="사회공헌 페이지로 이동">사회공헌</a></li>
+                <li><a href="/partner" title="제휴/광고/부대사업문의 페이지로 이동">제휴/광고/부대사업문의</a></li>
+                <li><a href="/support/terms" title="이용약관 페이지로 이동">이용약관</a></li>
+                <li><a href="/support/lcinfo" title="위치기반서비스 이용약관 페이지로 이동">위치기반서비스 이용약관</a></li>
+                <li class="privacy"><a href="/support/privacy" title="개인정보처리방침 페이지로 이동">개인정보처리방침</a></li>
+                <li><a href="https://jebo.joonganggroup.com/main.do" target="_blank" title="윤리경영 페이지로 이동">윤리경영</a></li>
+            </ul>
+
+            <a href="#layer_looking_theater" class="btn-looking-theater" title="극장찾기"><i class="iconset ico-footer-search"></i> 극장찾기</a>
+        </div>
+    </div>
+    <!--// footer-top -->
+
+    <!-- footer-bottom -->
+    <div class="footer-bottom">
+        <div class="inner-wrap">
+            <div class="ci">MEGABOX : Life Theater</div>
+
+            <div class="footer-info">
+                <div>
+                    <address>서울특별시 성동구 왕십리로 50, 6층 (성수동1가, 메가박스 스퀘어)</address>
+                    <p>ARS 1544-0070</p>
+                </div>
+                <p>대표자명 홍정인</p>
+                <p>&middot; 개인정보보호책임자 공성진</p>
+                <p>&middot; 사업자등록번호 211-86-59478</p>
+                <p>&middot; 통신판매업신고번호 2023-서울성동-0177</p>
+                <p class="copy">COPYRIGHT &copy; MegaboxJoongAng, Inc. All rights reserved</p>
+            </div>
+
+            <div class="footer-sns">
+            	<a href="https://www.youtube.com/onmegabox" target="_blank" title="MEGABOX 유튜브 페이지로 이동"><i class="iconset ico-youtubeN">유튜브</i></a>
+                <a href="http://instagram.com/megaboxon" target="_blank" title="MEGABOX 인스타그램 페이지로 이동"><i class="iconset ico-instagramN">인스타그램</i></a>
+                <a href="https://www.facebook.com/megaboxon" target="_blank" title="MEGABOX 페이스북 페이지로 이동"><i class="iconset ico-facebookN">페이스북</i></a>
+                <a href="https://twitter.com/megaboxon" target="_blank" title="MEGABOX 트위터 페이지로 이동"><i class="iconset ico-twitterN">트위터</i></a>
+            </div>
+        </div>
+    </div>
+    <!--// footer-bottom -->
+    <div id="layer_looking_theater" class="layer-looking-theater"></div>
+</footer>
+<!--// footer -->
+
+<!-- 모바일 때만 출력 -->
+<div class="go-mobile">
+	<a href="#" data-url="https://m.megabox.co.kr">모바일웹으로 보기 <i class="iconset ico-go-mobile"></i></a>
+</div>
+    </div>
+    <form id="mainForm">
+    </form>
+</body>
+</html>

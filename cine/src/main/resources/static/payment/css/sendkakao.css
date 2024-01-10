@@ -1,0 +1,36 @@
+.kakao{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.subbtn1{
+	font-size: 20pt;
+	text-decoration: none;
+	padding: 10px;
+	background-color: rgb(227, 210, 75);
+	margin-right: 10px;
+	border-radius: 10px;
+}
+.subbtn2{
+	font-size: 20pt;
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	margin-right: 10px;
+	background-color: rgb(115, 137, 223);
+}
+.subbtn3{
+	font-size: 20pt;
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgb(48, 173, 233);
+	margin-right: 10px;
+}
+.subbtn4{
+	font-size: 20pt;
+	text-decoration: none;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: rgb(221, 177, 225);
+}

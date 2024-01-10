@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="kr">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="login/js/modal.js"></script>
+
+	<link rel="stylesheet" href="/payment/css/header.css" media="all">
+	<link rel="stylesheet" href="/payment/css/payment.css" media="all">
+
+	<script src="/payment/js/payment.js"></script>
+
+
+</head>
+<body>
+
+
+	<div class="reservCheck">
+
+		<h1>예매정보 & 결제</h1>
+		<form id="reservation-form">
+
+
+			<table>
+				<tr>
+					<td><div id="payinfo" class="movieName"></div> </td>
+					<td rowspan="8"><img id="imglink" style="height:250px; "></td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="movieArea"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="movieArea2"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="movieDate"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="movieTime"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="moviePerson"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="movieSeats"></div> </td>
+				</tr>
+				<tr>
+					<td><div id="payinfo" class="moviePrice"></div> </td>
+				</tr>
+				
+				
+			</table>
+
+			
+
+			
+
+			<div class="paymentBtn">
+				<button type="submit"  id="paynow">결제</button>
+				<button type="button" id="cancel-button">취소</button>
+			</div>
+		</form>
+
+
+
+
+
+
+
+		<script>
+			// '결제' 버튼을 클릭했을 때 처리
+			document.getElementById("reservation-form").addEventListener("submit", function (event) {
+
+				event.preventDefault();
+
+
+				// 폼 데이터 가져오기
+				const formData = new FormData(this);
+				const xhr = new XMLHttpRequest();
+				xhr.open('POST', '/update', true);
+				// 요청 완료 시의 콜백 함수
+				xhr.onreadystatechange = function () {
+					if (xhr.readyState === 4 && xhr.status === 200) {
+						// 서버에서 반환한 응답 처리
+						// 예: 성공적으로 처리되었을 때 사용자에게 알림
+						alert('데이터가 성공적으로 업데이트되었습니다.');
+					}
+				};
+
+				// Ajax 요청 보내기
+				xhr.send(formData);
+
+			});
+
+			// '취소' 버튼을 클릭했을 때 처리
+			document.getElementById("cancel-button").addEventListener("click", function () {
+				// 현재 페이지에서 뒤로가기
+				window.history.back();
+			});
+		</script>
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

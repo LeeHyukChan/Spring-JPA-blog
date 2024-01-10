@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+
+/*비회원 예매*/
+
+
+/* 메인 css잡아먹음
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	margin-top: 120px;  불필요한 상하 여백을 제거합니다. 
+	padding-top: 300px;  불필요한 내부 여백을 제거합니다. 
+}
+
+.privacy-policy {
+	border-left: 1px solid #ccc;
+}
+
+.form-container, .privacy-policy {
+    width: 50%;
+    padding: 20px;
+    margin-bottom: 500px;  불필요한 여백을 제거합니다. 
+}
+*/
+    
+/*비회원 예매*/
+
+
+
+
+/* 로그인 모달 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%; /* 화면 가로 중앙에 위치 */
+    top: 50%; /* 화면 세로 중앙에 위치 */
+    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 translate 사용 */
+    width: 800px;
+    height: 80%;
+    overflow: auto;
+    background-color: transparent; 
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    /* margin: 10% auto; 2023.10.11 3:28 비회원 모달창 떄문에 변경중 기존 회원 로그인 크기*/
+    /* padding: 20px; 비회원 모달창 떄문에 변경중 기존 회원 로그인 크기* */
+    margin: 0 auto;
+    padding-top: 20px; /* 모달 상단과 탭간의 여백을 조절 */
+    padding-bottom: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+.modal-content-wrapper {
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 0; /* 모달 상단과 탭간의 여백을 조절 */
+    padding-bottom: 50px;
+     height: auto; /* 자식 요소에 맞게 높이를 자동으로 조절합니다 */
+}
+
+
+.modal-content .tab {
+    margin-top: 20px; /* 탭 간의 여백 조절 */
+}
+.tab-button {
+    width: 48%; /* 버튼의 너비를 48%로 설정하여 반으로 나눔 */
+    height: 40px; /* 버튼의 높이 설정 */
+    font-size: 16px; /* 버튼의 글꼴 크기 설정 */
+    margin-top: 0; /* 버튼 간의 여백 조절 */
+}
+.tab {
+    display: none;
+    text-align: center;
+
+    margin: 0; /* 수정: 모든 여백을 없앰 */
+    padding: 0; /* 수정: 내부 패딩을 없앰 */
+}
+
+.modal-content button {
+    margin-top: 10px;
+}
+
+.modal-content form {
+    text-align: center;
+}
+
+.modal-content form input {
+    margin-bottom: 10px;
+}
+
+.close:hover {
+    cursor: pointer;
+}
+/* 로그인 모달 */   
+
